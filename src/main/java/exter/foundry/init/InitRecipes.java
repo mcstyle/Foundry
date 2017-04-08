@@ -256,7 +256,7 @@ public class InitRecipes
       if(gear != null)
       {
         FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT * 4);
-        CastingRecipeManager.instance.addRecipe(new ItemStackMatcher(gear), fluid_stack, mold_gear, null);
+        CastingRecipeManager.instance.addRecipe(new ItemStackMatcher(gear), fluid_stack, mold_gear, new OreMatcher("gearBushing"));
         MeltingRecipeManager.instance.addRecipe(new ItemStackMatcher(gear), fluid_stack);
       }
 
@@ -709,7 +709,11 @@ public class InitRecipes
           int[] ids = OreDictionary.getOreIDs(stack);
           for(int j : ids)
           {
-            if(OreDictionary.getOreName(j).startsWith("ore"))
+            if(OreDictionary.getOreName(j).startsWith("orePoor"))
+            {
+              base_amount = FoundryAPI.FLUID_AMOUNT_NUGGET;
+              break;
+            } else if(OreDictionary.getOreName(j).startsWith("ore"))
             {
               base_amount = FoundryAPI.FLUID_AMOUNT_ORE;
               break;
