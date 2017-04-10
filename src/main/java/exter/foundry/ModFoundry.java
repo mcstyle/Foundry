@@ -84,7 +84,6 @@ import exter.foundry.tileentity.TileEntityRefractoryTankStandard;
   version = ModFoundry.MODVERSION,
   dependencies =
       "required-after:Forge@[12.18.2.2125,);"
-    + "required-after:substratum@[1.8.2.1,);"
     + "after:JEI@[3.14.7.416,)"
 )
 public class ModFoundry

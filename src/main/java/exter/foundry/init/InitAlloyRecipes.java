@@ -24,7 +24,7 @@ public class InitAlloyRecipes
   // Create recipes for all alloy making machines.
   static private void addSimpleAlloy(String output,String input_a,int amount_a,String input_b,int amount_b)
   {
-    ItemStack alloy_ingot = FoundryMiscUtils.getModItemFromOreDictionary("substratum", "ingot" + output, amount_a + amount_b);
+    ItemStack alloy_ingot = FoundryMiscUtils.getModItemFromOreDictionary("ingot" + output, amount_a + amount_b);
     if(alloy_ingot != null)
     {
       AlloyFurnaceRecipeManager.instance.addRecipe(

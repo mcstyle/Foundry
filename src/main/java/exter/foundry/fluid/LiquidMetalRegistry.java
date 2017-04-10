@@ -52,7 +52,7 @@ public class LiquidMetalRegistry implements IFluidRegistry
     FluidRegistry.registerFluid(fluid);
 
     String block_name = "block" + metal_name;
-    Object solid = FoundryMiscUtils.getModItemFromOreDictionary("substratum", block_name);
+    Object solid = FoundryMiscUtils.getModItemFromOreDictionary(block_name);
     if(solid == null)
     {
       solid = block_name;

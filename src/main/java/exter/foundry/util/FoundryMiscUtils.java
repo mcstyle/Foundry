@@ -68,22 +68,18 @@ public class FoundryMiscUtils
     return result;
   }
 
-  static public ItemStack getModItemFromOreDictionary(String modid,String orename)
+  static public ItemStack getModItemFromOreDictionary(String orename)
   {
-    return getModItemFromOreDictionary(modid, orename, 1);
+    return getModItemFromOreDictionary(orename, 1);
   }
 
-  static public ItemStack getModItemFromOreDictionary(String modid,String orename, int amount)
+  static public ItemStack getModItemFromOreDictionary(String orename, int amount)
   {
-    modid = modid.toLowerCase();
     for(ItemStack is:OreDictionary.getOres(orename))
     {
-      if(is.getItem().getRegistryName().getResourceDomain().equals(modid))
-      {
         is = is.copy();
         is.stackSize = amount;
         return is;
-      }
     }
     return null;
   }

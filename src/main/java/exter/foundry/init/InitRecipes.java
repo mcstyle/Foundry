@@ -208,7 +208,7 @@ public class InitRecipes
       }
       
       // Ingot
-      ItemStack ingot = FoundryMiscUtils.getModItemFromOreDictionary("substratum", "ingot" + name);
+      ItemStack ingot = FoundryMiscUtils.getModItemFromOreDictionary("ingot" + name);
       if(ingot != null)
       {
         FluidStack fluid_stack = new FluidStack( fluid, FoundryAPI.FLUID_AMOUNT_INGOT);
@@ -217,7 +217,7 @@ public class InitRecipes
       }
 
       // Block
-      ItemStack block = FoundryMiscUtils.getModItemFromOreDictionary("substratum", "block" + name);
+      ItemStack block = FoundryMiscUtils.getModItemFromOreDictionary("block" + name);
       if(block != null)
       {
         FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_BLOCK);
@@ -226,7 +226,7 @@ public class InitRecipes
       }
 
       // Slab
-      ItemStack slab = FoundryMiscUtils.getModItemFromOreDictionary("substratum", "slab" + name);
+      ItemStack slab = FoundryMiscUtils.getModItemFromOreDictionary("slab" + name);
       if(slab != null)
       {
         FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_BLOCK / 2);
@@ -236,7 +236,7 @@ public class InitRecipes
       }
       
       // Stairs
-      ItemStack stairs = FoundryMiscUtils.getModItemFromOreDictionary("substratum", "stairs" + name);
+      ItemStack stairs = FoundryMiscUtils.getModItemFromOreDictionary("stairs" + name);
       if(stairs != null)
       {
         FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_BLOCK * 3 / 4);
@@ -245,14 +245,14 @@ public class InitRecipes
       }
 
       // Dust
-      ItemStack dust = FoundryMiscUtils.getModItemFromOreDictionary("substratum", "dust" + name);
+      ItemStack dust = FoundryMiscUtils.getModItemFromOreDictionary("dust" + name);
       if(dust != null)
       {
         AtomizerRecipeManager.instance.addRecipe(new ItemStackMatcher(dust), new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT));
       }
       
       // Gear
-      ItemStack gear = FoundryMiscUtils.getModItemFromOreDictionary("substratum", "gear" + name);
+      ItemStack gear = FoundryMiscUtils.getModItemFromOreDictionary("gear" + name);
       if(gear != null)
       {
         FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT * 4);
@@ -261,7 +261,7 @@ public class InitRecipes
       }
 
       // Plate
-      ItemStack plate = FoundryMiscUtils.getModItemFromOreDictionary("substratum", "plate" + name);
+      ItemStack plate = FoundryMiscUtils.getModItemFromOreDictionary("plate" + name);
       if(plate != null)
       {
         FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT);
@@ -272,7 +272,7 @@ public class InitRecipes
       }
 
       // Rod
-      ItemStack rod = FoundryMiscUtils.getModItemFromOreDictionary("substratum", "rod" + name);
+      ItemStack rod = FoundryMiscUtils.getModItemFromOreDictionary("rod" + name);
       if(rod != null)
       {
         FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT / 2);
