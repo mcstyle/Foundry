@@ -6,12 +6,12 @@ import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.block.FoundryBlocks;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FoundryFluids;
+import exter.foundry.fluid.LiquidMetalRegistry;
 import exter.foundry.recipes.manager.AlloyFurnaceRecipeManager;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.AlloyingCrucibleRecipeManager;
 import exter.foundry.recipes.manager.InfuserRecipeManager;
 import exter.foundry.util.FoundryMiscUtils;
-import exter.foundry.fluid.LiquidMetalRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -87,31 +87,37 @@ public class InitAlloyRecipes
     Fluid liquid_redstone = FluidRegistry.getFluid("liquidredstone");
     Fluid liquid_glowstone = FluidRegistry.getFluid("liquidglowstone");
     Fluid liquid_enderpearl = FluidRegistry.getFluid("liquidenderpearl");
-    
-    AlloyMixerRecipeManager.instance.addRecipe(
-        new FluidStack(FoundryFluids.liquid_signalum, 108),
-        new FluidStack[] {
-          new FluidStack(FoundryFluids.liquid_copper, 81),
-          new FluidStack(FoundryFluids.liquid_silver, 27),
-          new FluidStack(liquid_redstone, 250)
+
+    if(liquid_redstone != null) {
+      AlloyMixerRecipeManager.instance.addRecipe(
+          new FluidStack(FoundryFluids.liquid_signalum, 108),
+          new FluidStack[] {
+              new FluidStack(FoundryFluids.liquid_copper, 81),
+              new FluidStack(FoundryFluids.liquid_silver, 27),
+              new FluidStack(liquid_redstone, 250)
           });
-    
-    AlloyMixerRecipeManager.instance.addRecipe(
-        new FluidStack(FoundryFluids.liquid_lumium, 108),
-        new FluidStack[] {
-          new FluidStack(FoundryFluids.liquid_tin, 81),
-          new FluidStack(FoundryFluids.liquid_silver, 27),
-          new FluidStack(liquid_glowstone, 250)
+    }
+
+    if(liquid_glowstone != null) {
+      AlloyMixerRecipeManager.instance.addRecipe(
+          new FluidStack(FoundryFluids.liquid_lumium, 108),
+          new FluidStack[] {
+              new FluidStack(FoundryFluids.liquid_tin, 81),
+              new FluidStack(FoundryFluids.liquid_silver, 27),
+              new FluidStack(liquid_glowstone, 250)
           });
-    
-    AlloyMixerRecipeManager.instance.addRecipe(
-        new FluidStack(FoundryFluids.liquid_enderium, 108),
-        new FluidStack[] {
-          new FluidStack(FoundryFluids.liquid_tin, 54),
-          new FluidStack(FoundryFluids.liquid_silver, 27),
-          new FluidStack(FoundryFluids.liquid_platinum, 27),
-          new FluidStack(liquid_enderpearl, 250)
+    }
+
+    if(liquid_enderpearl != null) {
+      AlloyMixerRecipeManager.instance.addRecipe(
+          new FluidStack(FoundryFluids.liquid_enderium, 108),
+          new FluidStack[] {
+              new FluidStack(FoundryFluids.liquid_tin, 54),
+              new FluidStack(FoundryFluids.liquid_silver, 27),
+              new FluidStack(FoundryFluids.liquid_platinum, 27),
+              new FluidStack(liquid_enderpearl, 250)
           });
+    }
     
     if(FoundryConfig.recipe_steel)
     {

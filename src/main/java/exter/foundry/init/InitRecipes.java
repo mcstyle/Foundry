@@ -1,30 +1,15 @@
 package exter.foundry.init;
 
-import java.util.List;
-import java.util.Map;
-
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.ItemDye;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.ICastingTableRecipe;
 import exter.foundry.api.recipe.IMeltingRecipe;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
-import exter.foundry.block.FoundryBlocks;
 import exter.foundry.block.BlockCastingTable.EnumTable;
 import exter.foundry.block.BlockComponent;
 import exter.foundry.block.BlockFoundryMachine.EnumMachine;
+import exter.foundry.block.FoundryBlocks;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluids;
@@ -43,6 +28,21 @@ import exter.foundry.recipes.manager.InfuserRecipeManager;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
 import exter.foundry.recipes.manager.MoldRecipeManager;
 import exter.foundry.util.FoundryMiscUtils;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemDye;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+
+import java.util.List;
+import java.util.Map;
 
 public class InitRecipes
 {
@@ -80,7 +80,7 @@ public class InitRecipes
         int c2 = 63 + ((color >> 8 ) & 0xFF) * 3 / 4;
         int c3 = 63 + ((color >> 16) & 0xFF) * 3 / 4;
         int fluid_color = c1 | (c2 << 8) | (c3 << 16);
-        
+
         int meta = dye.getMetadata();
         ItemStack stained_glass = new ItemStack(Blocks.STAINED_GLASS,1,meta);
 
@@ -101,15 +101,22 @@ public class InitRecipes
     Fluid liquid_redstone = FluidRegistry.getFluid("liquidredstone");
     Fluid liquid_glowstone = FluidRegistry.getFluid("liquidglowstone");
     Fluid liquid_enderpearl = FluidRegistry.getFluid("liquidenderpearl");
-    
-    
-    MeltingRecipeManager.instance.addRecipe(new OreMatcher("dustRedstone"), new FluidStack(liquid_redstone,100));
-    MeltingRecipeManager.instance.addRecipe(new OreMatcher("dustGlowstone"), new FluidStack(liquid_glowstone,250),liquid_glowstone.getTemperature(),90);
-    MeltingRecipeManager.instance.addRecipe(new OreMatcher("dustEnderpearl"), new FluidStack(liquid_enderpearl,250),liquid_enderpearl.getTemperature(),75);
-    MeltingRecipeManager.instance.addRecipe(new ItemStackMatcher(Items.ENDER_PEARL), new FluidStack(liquid_enderpearl,250),liquid_enderpearl.getTemperature(),75);
 
-    MeltingRecipeManager.instance.addRecipe(new OreMatcher("blockRedstone"), new FluidStack(liquid_redstone,900));
-    MeltingRecipeManager.instance.addRecipe(new OreMatcher("blockGlowstone"), new FluidStack(liquid_glowstone,1000),liquid_glowstone.getTemperature(),90);
+	  if(liquid_redstone != null) {
+		  MeltingRecipeManager.instance.addRecipe(new OreMatcher("dustRedstone"), new FluidStack(liquid_redstone, 100));
+
+		  MeltingRecipeManager.instance.addRecipe(new OreMatcher("blockRedstone"), new FluidStack(liquid_redstone,900));
+	  }
+	  if(liquid_glowstone != null) {
+		  MeltingRecipeManager.instance.addRecipe(new OreMatcher("dustGlowstone"), new FluidStack(liquid_glowstone, 250), liquid_glowstone.getTemperature(), 90);
+
+		  MeltingRecipeManager.instance.addRecipe(new OreMatcher("blockGlowstone"), new FluidStack(liquid_glowstone,1000),liquid_glowstone.getTemperature(),90);
+	  }
+	  if(liquid_enderpearl != null) {
+		  MeltingRecipeManager.instance.addRecipe(new OreMatcher("dustEnderpearl"), new FluidStack(liquid_enderpearl, 250), liquid_enderpearl.getTemperature(), 75);
+		  MeltingRecipeManager.instance.addRecipe(new ItemStackMatcher(Items.ENDER_PEARL), new FluidStack(liquid_enderpearl, 250), liquid_enderpearl.getTemperature(), 75);
+	  }
+
 
     MoldRecipeManager.instance.addRecipe(FoundryItems.mold(ItemMold.SubItem.INGOT), 2, 4, new int[]
         {
@@ -196,7 +203,7 @@ public class InitRecipes
     {
       InitToolRecipes.init();
     }
-    
+
     //Base casting recipes.
     for(String name:LiquidMetalRegistry.instance.getFluidNames())
     {
@@ -206,7 +213,7 @@ public class InitRecipes
       {
         continue;
       }
-      
+
       // Ingot
       ItemStack ingot = FoundryMiscUtils.getModItemFromOreDictionary("ingot" + name);
       if(ingot != null)
@@ -234,7 +241,7 @@ public class InitRecipes
         CastingRecipeManager.instance.addRecipe(new ItemStackMatcher(slab), fluid_stack, mold_slab, null);
         MeltingRecipeManager.instance.addRecipe(new ItemStackMatcher(slab), fluid_stack);
       }
-      
+
       // Stairs
       ItemStack stairs = FoundryMiscUtils.getModItemFromOreDictionary("stairs" + name);
       if(stairs != null)
@@ -250,7 +257,7 @@ public class InitRecipes
       {
         AtomizerRecipeManager.instance.addRecipe(new ItemStackMatcher(dust), new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT));
       }
-      
+
       // Gear
       ItemStack gear = FoundryMiscUtils.getModItemFromOreDictionary("gear" + name);
       if(gear != null)
@@ -296,7 +303,7 @@ public class InitRecipes
       InfuserRecipeManager.instance.addRecipe(new FluidStack(FoundryFluids.liquid_aluminium,54), new FluidStack(FoundryFluids.liquid_alumina,54), new OreMatcher("dustSmallCoal"), 60000);
       InfuserRecipeManager.instance.addRecipe(new FluidStack(FoundryFluids.liquid_aluminium,54), new FluidStack(FoundryFluids.liquid_iron,54), new OreMatcher("dustSmallCharcoal"), 60000);
     }
-    
+
     BurnerHeaterFuelManager.instance.addFuel(
         new ItemStackMatcher(new ItemStack(Items.COAL,1,0)),// Coal
         1600,
@@ -562,18 +569,18 @@ public class InitRecipes
         " R ",
         "GCG",
         "HRH",
-        'R', redstone_stack, 
+        'R', redstone_stack,
         'B', refbrick_stack,
         'C', casing_stack,
         'G', "gearInvar",
         'H', heatingcoil_stack));
-    
+
     GameRegistry.addRecipe(
         new ItemStack(FoundryBlocks.block_alloy_furnace),
         "BBB",
         "BFB",
         "BBB",
-        'B', refbrick_stack, 
+        'B', refbrick_stack,
         'F', furnace_stack);
 
     GameRegistry.addRecipe(
@@ -581,7 +588,7 @@ public class InitRecipes
         "R R",
         "RBR",
         " R ",
-        'R', refbrick_stack, 
+        'R', refbrick_stack,
         'B', bucket_stack);
 
     GameRegistry.addRecipe(new ShapedOreRecipe(
@@ -589,8 +596,8 @@ public class InitRecipes
         "GHG",
         "RCR",
         " B ",
-        'H', new ItemStack(FoundryBlocks.block_refractory_hopper), 
-        'B', Items.BUCKET, 
+        'H', new ItemStack(FoundryBlocks.block_refractory_hopper),
+        'B', Items.BUCKET,
         'R', Items.REDSTONE,
         'C', casing_stack,
         'G', "gearBronze"));
@@ -600,7 +607,7 @@ public class InitRecipes
         "HRH",
         "BCB",
         "BBB",
-        'H', new ItemStack(FoundryBlocks.block_refractory_spout), 
+        'H', new ItemStack(FoundryBlocks.block_refractory_spout),
         'B', refbrick_stack,
         'R', cauldron_stack,
         'C', casing_stack));
@@ -610,13 +617,13 @@ public class InitRecipes
         " H ",
         "RCR",
         "GPG",
-        'H', chest_stack, 
-        'G', "gearIron", 
+        'H', chest_stack,
+        'G', "gearIron",
         'P', piston_stack,
         'C', casing_stack,
         'R', redstone_stack));
 
-    
+
     GameRegistry.addRecipe(new ShapedOreRecipe(
         FoundryBlocks.block_machine.asItemStack(EnumMachine.ALLOYMIXER),
         " P ",
@@ -667,7 +674,7 @@ public class InitRecipes
           'I', "plateCopper",
           'C', casing_stack));
     }
-    
+
     InitFirearmRecipes.init();
   }
 
@@ -692,11 +699,11 @@ public class InitRecipes
         }
       }
     }
-    
+
     for(Map.Entry<ItemStack, ItemStack> entry:FurnaceRecipes.instance().getSmeltingList().entrySet())
     {
       ItemStack stack = entry.getKey();
-      
+
       if(stack != null && stack.getItem() != null && MeltingRecipeManager.instance.findRecipe(stack) == null)
       {
         ItemStack result = entry.getValue();
@@ -723,7 +730,7 @@ public class InitRecipes
         }
       }
     }
-    
+
     ItemStack ingot_mold = FoundryItems.mold(ItemMold.SubItem.INGOT);
     ItemStack block_mold = FoundryItems.mold(ItemMold.SubItem.BLOCK);
     for(String name:LiquidMetalRegistry.instance.getFluidNames())
@@ -768,7 +775,7 @@ public class InitRecipes
         }
       }
     }
-      
+
     InitHardCore.init();
   }
 }
