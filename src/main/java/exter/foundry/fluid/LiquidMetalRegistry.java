@@ -8,6 +8,7 @@ import java.util.Set;
 import exter.foundry.api.registry.IFluidRegistry;
 import exter.foundry.block.BlockLiquidMetal;
 import exter.foundry.block.FoundryBlocks;
+import exter.foundry.item.ItemBlockSpecialName;
 import exter.foundry.util.FoundryMiscUtils;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -59,7 +60,7 @@ public class LiquidMetalRegistry implements IFluidRegistry
     }
 
     Block liquid_block = new BlockLiquidMetal(fluid, "liquid" + metal_name, solid);
-    FoundryBlocks.register(liquid_block);
+    FoundryBlocks.register(liquid_block, new ItemBlockSpecialName(liquid_block));
 
     fluid.setBlock(liquid_block);
     
@@ -81,7 +82,7 @@ public class LiquidMetalRegistry implements IFluidRegistry
     FluidRegistry.registerFluid(fluid);
 
     Block liquid_block = new BlockLiquidMetal(fluid, "liquid" + metal_name, solid);
-    FoundryBlocks.register(liquid_block);
+    FoundryBlocks.register(liquid_block, new ItemBlockSpecialName(liquid_block));
 
     fluid.setBlock(liquid_block);
     

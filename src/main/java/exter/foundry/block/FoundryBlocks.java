@@ -34,6 +34,12 @@ public class FoundryBlocks
     GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));   
   }
 
+  static public void register(Block block, ItemBlock itemBlock)
+  {
+    GameRegistry.register(block);
+    GameRegistry.register(itemBlock.setRegistryName(block.getRegistryName()));
+  }
+
   static private <T extends Block & IBlockVariants>void registerMulti(T block)
   {
     GameRegistry.register(block);

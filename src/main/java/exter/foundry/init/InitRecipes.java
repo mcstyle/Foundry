@@ -153,6 +153,12 @@ public class InitRecipes
             1, 0, 1, 0, 1
         });
 
+    MoldRecipeManager.instance.addRecipe(FoundryItems.mold(ItemMold.SubItem.NUGGET), 1, 2, new int[]
+        {
+            2,
+            1
+        });
+
     MoldRecipeManager.instance.addRecipe(FoundryItems.mold(ItemMold.SubItem.BLOCK), 6, 6, new int[]
         {
             4, 4, 4, 4, 4, 4,
@@ -192,6 +198,7 @@ public class InitRecipes
     ItemStack mold_block = FoundryItems.mold(ItemMold.SubItem.BLOCK);
     ItemStack mold_gear = FoundryItems.mold(ItemMold.SubItem.GEAR);
     ItemStack mold_rod = FoundryItems.mold(ItemMold.SubItem.ROD);
+    ItemStack mold_nugget = FoundryItems.mold(ItemMold.SubItem.NUGGET);
 
 
     for(ItemMold.SubItem sub:ItemMold.SubItem.values())
@@ -287,6 +294,15 @@ public class InitRecipes
         CastingRecipeManager.instance.addRecipe(new ItemStackMatcher(rod), fluid_stack, mold_rod, null);
         CastingTableRecipeManager.instance.addRecipe(new ItemStackMatcher(rod), fluid_stack, ICastingTableRecipe.TableType.ROD);
         MeltingRecipeManager.instance.addRecipe(new ItemStackMatcher(rod), fluid_stack);
+      }
+
+      // Nugget
+      ItemStack nugget = FoundryMiscUtils.getModItemFromOreDictionary("nugget" + name);
+      if(nugget != null)
+      {
+        FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_NUGGET);
+        CastingRecipeManager.instance.addRecipe(new ItemStackMatcher(nugget), fluid_stack, mold_nugget, null);
+        MeltingRecipeManager.instance.addRecipe(new ItemStackMatcher(nugget), fluid_stack);
       }
     }
 

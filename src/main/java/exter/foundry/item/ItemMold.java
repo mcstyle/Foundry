@@ -40,7 +40,8 @@ public class ItemMold extends Item
     PELLET(22,"moldPellet"),
     SHELL_CASING(23,"moldShellCasing"),
     SHOTGUN_PUMP(24,"moldShotgunPump"),
-    SHOTGUN_FRAME(25,"moldShotgunFrame");
+    SHOTGUN_FRAME(25,"moldShotgunFrame"),
+    NUGGET(26, "moldNugget");
     
     public final int id;
     public final String name;
