@@ -330,6 +330,7 @@ item.foundry.moldPellet.name=Pellet Mold
 item.foundry.moldShellCasing.name=Shell Casing Mold
 item.foundry.moldShotgunPump.name=Shotgun Pump Mold
 item.foundry.moldShotgunFrame.name=Shotgun Frame Mold
+item.foundry.moldNugget.name=Nugget Mold
 
 item.foundry.fluidContainer.name=Refractory Fluid Container
 
