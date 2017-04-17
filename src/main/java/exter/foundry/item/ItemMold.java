@@ -41,7 +41,11 @@ public class ItemMold extends Item
     SHELL_CASING(23,"moldShellCasing"),
     SHOTGUN_PUMP(24,"moldShotgunPump"),
     SHOTGUN_FRAME(25,"moldShotgunFrame"),
-    NUGGET(26, "moldNugget");
+    NUGGET(26, "moldNugget"),
+    CABLE_IC2(27, "moldCableIC2"),
+    INSULATED_CABLE_IC2(28, "moldCableInsulatedIC2"),
+    CASING_IC2(29, "moldCasingIC2"),
+    DENSE_PLATE_IC2(30, "moldDensePlateIC2");
     
     public final int id;
     public final String name;

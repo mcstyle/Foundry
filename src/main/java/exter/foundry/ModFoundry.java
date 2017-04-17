@@ -3,6 +3,7 @@ package exter.foundry;
 import java.util.ArrayList;
 import java.util.List;
 
+import exter.foundry.integration.*;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.entity.EnumCreatureType;
@@ -33,12 +34,6 @@ import exter.foundry.entity.EntitySkeletonGun;
 import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.fluid.LiquidMetalRegistry;
 import exter.foundry.init.InitRecipes;
-import exter.foundry.integration.ModIntegrationBotania;
-import exter.foundry.integration.ModIntegrationEnderIO;
-import exter.foundry.integration.ModIntegrationManager;
-import exter.foundry.integration.ModIntegrationMinetweaker;
-import exter.foundry.integration.ModIntegrationMolten;
-import exter.foundry.integration.ModIntegrationTiCon;
 import exter.foundry.item.FoundryItems;
 import exter.foundry.network.MessageTileEntitySync;
 import exter.foundry.proxy.CommonFoundryProxy;
@@ -119,6 +114,8 @@ public class ModFoundry
     ModIntegrationManager.registerIntegration(config,ModIntegrationMolten.class);
     ModIntegrationManager.registerIntegration(config,ModIntegrationEnderIO.class);
     ModIntegrationManager.registerIntegration(config,ModIntegrationBotania.class);
+    ModIntegrationManager.registerIntegration(config,ModIntegrationIC2.class);
+    ModIntegrationManager.registerIntegration(config,ModIntegrationRailcraft.class);
 
 
     FoundryAPI.fluids = LiquidMetalRegistry.instance;

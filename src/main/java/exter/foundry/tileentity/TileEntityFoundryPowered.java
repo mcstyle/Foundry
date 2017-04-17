@@ -3,24 +3,31 @@ package exter.foundry.tileentity;
 
 
 import cofh.api.energy.IEnergyReceiver;
+import ic2.api.energy.tile.IEnergyEmitter;
+import ic2.api.energy.tile.IEnergyTile;
 import net.darkhax.tesla.api.ITeslaConsumer;
 import net.darkhax.tesla.capability.TeslaCapabilities;
-//import ic2.api.energy.event.EnergyTileLoadEvent;
-//import ic2.api.energy.event.EnergyTileUnloadEvent;
-//import ic2.api.energy.tile.IEnergySink;
+import ic2.api.energy.event.EnergyTileLoadEvent;
+import ic2.api.energy.event.EnergyTileUnloadEvent;
+import ic2.api.energy.tile.IEnergySink;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
+
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Base class for all machines.
  */
-//@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "IC2")
-public abstract class TileEntityFoundryPowered extends TileEntityFoundry implements IEnergyReceiver/*,IEnergySink*/
+@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "IC2")
+public abstract class TileEntityFoundryPowered extends TileEntityFoundry implements IEnergyReceiver, IEnergySink, IEnergyTile
 {
   @Optional.Interface(iface = "net.darkhax.tesla.api.ITeslaConsumer", modid = "Tesla")
   private class TeslaConsumer implements ITeslaConsumer
@@ -73,7 +80,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
     }    
   }
   
-//  private boolean added_enet;
+  private boolean added_enet;
   protected boolean update_energy;
   protected boolean update_energy_tick;
   
@@ -102,7 +109,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
     fe = new ForgeEnergyConsumer();
     update_energy = false;
     update_energy_tick = true;
-//    added_enet = false;
+    added_enet = false;
   }
 
   
@@ -130,10 +137,10 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
     return en;
   }
   
-//  private double receiveEU(double eu,boolean do_receive)
-//  {
-//    return (double)receiveFoundryEnergy((int)(eu * RATIO_EU),do_receive,true) / RATIO_EU;
-//  }
+  private double receiveEU(double eu,boolean do_receive)
+  {
+    return (double)receiveFoundryEnergy((int)(eu * RATIO_EU),do_receive,true) / RATIO_EU;
+  }
   
   public long useFoundryEnergy(long amount,boolean do_use)
   {
@@ -188,37 +195,37 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
   {
     update_energy_tick = true;
   }
-  
-//  @Override
-//  public void updateEntity()
-//  {
-//    if(!added_enet)
-//    {
-//      try
-//      {
-//        getClass().getMethod("LoadEnet").invoke(this);
-//      } catch(IllegalAccessException e)
-//      {
-//        throw new RuntimeException(e);
-//      } catch(IllegalArgumentException e)
-//      {
-//        throw new RuntimeException(e);
-//      } catch(InvocationTargetException e)
-//      {
-//        throw new RuntimeException(e);
-//      } catch(NoSuchMethodException e)
-//      {
-//        if(Loader.isModLoaded("IC2"))
-//        {
-//          throw new RuntimeException(e);
-//        }
-//      } catch(SecurityException e)
-//      {
-//        throw new RuntimeException(e);
-//      }
-//    }
-//    super.updateEntity();
-//  }
+
+  @Override
+  public void update()
+  {
+    if(!added_enet)
+    {
+      try
+      {
+        getClass().getMethod("LoadEnet").invoke(this);
+      } catch(IllegalAccessException e)
+      {
+        throw new RuntimeException(e);
+      } catch(IllegalArgumentException e)
+      {
+        throw new RuntimeException(e);
+      } catch(InvocationTargetException e)
+      {
+        throw new RuntimeException(e);
+      } catch(NoSuchMethodException e)
+      {
+        if(Loader.isModLoaded("IC2"))
+        {
+          throw new RuntimeException(e);
+        }
+      } catch(SecurityException e)
+      {
+        throw new RuntimeException(e);
+      }
+    }
+    super.update();
+  }
   
   private void updateFoundryEnergy()
   {
@@ -324,80 +331,80 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
     }
   }
 
-//  @Override
-//  public void onChunkUnload()
-//  {
-//    try
-//    {
-//      getClass().getMethod("UnloadEnet").invoke(this);
-//    } catch(IllegalAccessException e)
-//    {
-//      throw new RuntimeException(e);
-//    } catch(IllegalArgumentException e)
-//    {
-//      throw new RuntimeException(e);
-//    } catch(InvocationTargetException e)
-//    {
-//      throw new RuntimeException(e);
-//    } catch(NoSuchMethodException e)
-//    {
-//      if(Loader.isModLoaded("IC2"))
-//      {
-//        throw new RuntimeException(e);
-//      }
-//    } catch(SecurityException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
+  @Override
+  public void onChunkUnload()
+  {
+    try
+    {
+      getClass().getMethod("UnloadEnet").invoke(this);
+    } catch(IllegalAccessException e)
+    {
+      throw new RuntimeException(e);
+    } catch(IllegalArgumentException e)
+    {
+      throw new RuntimeException(e);
+    } catch(InvocationTargetException e)
+    {
+      throw new RuntimeException(e);
+    } catch(NoSuchMethodException e)
+    {
+      if(Loader.isModLoaded("IC2"))
+      {
+        throw new RuntimeException(e);
+      }
+    } catch(SecurityException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 
-//  @Optional.Method(modid = "IC2")
-//  public void UnloadEnet()
-//  {
-//    if(added_enet)
-//    {
-//      MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
-//      added_enet = false;
-//    }
-//  }
-//  
-//  @Optional.Method(modid = "IC2")
-//  public void LoadEnet()
-//  {
-//    if(!added_enet && !FMLCommonHandler.instance().getEffectiveSide().isClient())
-//    {
-//      MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
-//      added_enet = true;
-//    }
-//  }
-//  
-//  @Optional.Method(modid = "IC2")
-//  @Override
-//  public double getDemandedEnergy()
-//  {
-//    return (double)(GetEnergyCapacity() - GetStoredEnergy()) / RATIO_EU;
-//  }
-//
-//  @Optional.Method(modid = "IC2")
-//  @Override
-//  public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage)
-//  {
-//    double use_amount = Math.max(Math.min(amount, getDemandedEnergy()), 0);
-//
-//    return amount - ReceiveEU(use_amount, true);
-//  }
-//
-//  @Optional.Method(modid = "IC2")
-//  @Override
-//  public int getSinkTier()
-//  {
-//    return 1;
-//  }
-//  
-//  @Optional.Method(modid = "IC2")
-//  @Override
-//  public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction)
-//  {
-//    return true;
-//  }
+  @Optional.Method(modid = "IC2")
+  public void UnloadEnet()
+  {
+    if(added_enet)
+    {
+      MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
+      added_enet = false;
+    }
+  }
+
+  @Optional.Method(modid = "IC2")
+  public void LoadEnet()
+  {
+    if(!added_enet && !FMLCommonHandler.instance().getEffectiveSide().isClient())
+    {
+      MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
+      added_enet = true;
+    }
+  }
+
+  @Optional.Method(modid = "IC2")
+  @Override
+  public double getDemandedEnergy()
+  {
+    return (double)(getFoundryEnergyCapacity() - getStoredFoundryEnergy()) / RATIO_EU;
+  }
+
+  @Optional.Method(modid = "IC2")
+  @Override
+  public double injectEnergy(EnumFacing directionFrom, double amount, double voltage)
+  {
+    double use_amount = Math.max(Math.min(amount, getDemandedEnergy()), 0);
+
+    return amount - receiveEU(use_amount, true);
+  }
+
+  @Optional.Method(modid = "IC2")
+  @Override
+  public int getSinkTier()
+  {
+    return 1;
+  }
+
+  @Optional.Method(modid = "IC2")
+  @Override
+  public boolean acceptsEnergyFrom(IEnergyEmitter emitter, EnumFacing direction)
+  {
+    return true;
+  }
 }
