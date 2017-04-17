@@ -26,6 +26,7 @@ public class FoundryFluids
   static public Fluid liquid_signalum;
   static public Fluid liquid_lumium;
   static public Fluid liquid_enderium;
+  static public Fluid liquid_rubber;
   
   static public void init()
   {
@@ -56,7 +57,7 @@ public class FoundryFluids
 
     LiquidMetalRegistry.instance.registerLiquidMetal( "Manganese", 1550, 15);   
     LiquidMetalRegistry.instance.registerLiquidMetal( "Titanium", 2000, 15);
-    LiquidMetalRegistry.instance.registerLiquidMetal( "Rubber", 460, 0);
+    liquid_rubber = LiquidMetalRegistry.instance.registerLiquidMetal( "Rubber", 460, 0);
     LiquidMetalRegistry.instance.registerLiquidMetal( "StainlessSteel", 1900, 15);
     LiquidMetalRegistry.instance.registerLiquidMetal( "Kanthal", 1900, 15);
     LiquidMetalRegistry.instance.registerLiquidMetal( "Nichrome", 1950, 15);    
