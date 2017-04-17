@@ -45,7 +45,7 @@ public class ItemMold extends Item
     CABLE_IC2(27, "moldCableIC2"),
     INSULATED_CABLE_IC2(28, "moldCableInsulatedIC2"),
     CASING_IC2(29, "moldCasingIC2"),
-    DENSE_PLATE_IC2(30, "moldDensePlateIC2");
+    CROWBAR_RAILCRAFT(30, "moldCrowbarRailcraft");
     
     public final int id;
     public final String name;

@@ -1,13 +1,9 @@
 package exter.foundry.integration;
 
-//import ic2.api.item.Items;
         import exter.foundry.api.FoundryUtils;
         import exter.foundry.fluid.FoundryFluids;
         import exter.foundry.recipes.manager.MoldRecipeManager;
         import exter.foundry.api.recipe.matcher.ItemStackMatcher;
-        import net.minecraft.item.Item;
-        import net.minecraft.util.ResourceLocation;
-        import net.minecraftforge.fluids.FluidRegistry;
         import net.minecraftforge.fml.common.Loader;
         import net.minecraftforge.fml.relauncher.Side;
         import net.minecraftforge.fml.relauncher.SideOnly;
@@ -23,9 +19,7 @@ package exter.foundry.integration;
         import exter.foundry.item.FoundryItems;
         import exter.foundry.item.ItemMold;
         import exter.foundry.material.MaterialRegistry;
-        import exter.foundry.recipes.manager.CastingRecipeManager;
         import exter.foundry.recipes.manager.MeltingRecipeManager;
-        import exter.foundry.fluid.LiquidMetalRegistry;
 
 public class ModIntegrationIC2 implements IModIntegration {
 
@@ -37,13 +31,6 @@ public class ModIntegrationIC2 implements IModIntegration {
     @Override
     public void onInit()
     {
-        MoldRecipeManager.instance.addRecipe(FoundryItems.mold(ItemMold.SubItem.DENSE_PLATE_IC2), 4, 4, new int[]
-                {
-                        3, 3, 3, 3,
-                        3, 3, 3, 3,
-                        3, 3, 3, 3,
-                        3, 3, 3, 3
-                });
         MoldRecipeManager.instance.addRecipe(FoundryItems.mold(ItemMold.SubItem.CABLE_IC2), 6, 6, new int[]
                 {
                         0, 0, 0, 0, 0, 0,
@@ -126,14 +113,6 @@ public class ModIntegrationIC2 implements IModIntegration {
         ItemStack lead_casing = ItemStack.copyItemStack(IC2Items.getItem("casing", "lead"));
         ItemStack steel_casing = ItemStack.copyItemStack(IC2Items.getItem("casing", "steel"));
 
-        ItemStack dense_copper = ItemStack.copyItemStack(IC2Items.getItem("plate", "dense_copper"));
-        ItemStack dense_tin = ItemStack.copyItemStack(IC2Items.getItem("plate", "dense_tin"));
-        ItemStack dense_bronze = ItemStack.copyItemStack(IC2Items.getItem("plate", "dense_bronze"));
-        ItemStack dense_gold = ItemStack.copyItemStack(IC2Items.getItem("plate", "dense_gold"));
-        ItemStack dense_iron = ItemStack.copyItemStack(IC2Items.getItem("plate", "dense_iron"));
-        ItemStack dense_lead = ItemStack.copyItemStack(IC2Items.getItem("plate", "dense_lead"));
-        ItemStack dense_steel = ItemStack.copyItemStack(IC2Items.getItem("plate", "dense_steel"));
-
 
         ItemStack copper_cable_insulated = ItemStack.copyItemStack(IC2Items.getItem("cable", "type:copper,insulation:1"));
         ItemStack tin_cable_insulated = ItemStack.copyItemStack(IC2Items.getItem("cable", "type:tin,insulation:1"));
@@ -142,7 +121,6 @@ public class ModIntegrationIC2 implements IModIntegration {
         ItemStack gold_cable_insulated2x = ItemStack.copyItemStack(IC2Items.getItem("cable", "type:gold,insulation:2"));
         ItemStack iron_cable_insulated2x = ItemStack.copyItemStack(IC2Items.getItem("cable", "type:iron,insulation:2"));
         ItemStack iron_cable_insulated3x = ItemStack.copyItemStack(IC2Items.getItem("cable", "type:iron,insulation:3"));
-        ItemStack resin = ItemStack.copyItemStack(IC2Items.getItem("resin"));
 
         Fluid liquid_bronze = FoundryFluids.liquid_bronze;
         Fluid liquid_copper = FoundryFluids.liquid_copper;
@@ -170,7 +148,11 @@ public class ModIntegrationIC2 implements IModIntegration {
 
             }
 
-            FoundryUtils.registerBasicMeltingRecipes( "rubber", liquid_rubber);
+            ItemStackMatcher rubber = new ItemStackMatcher(ItemStack.copyItemStack(IC2Items.getItem("crafting", "rubber")));
+            ItemStackMatcher resin = new ItemStackMatcher(ItemStack.copyItemStack(IC2Items.getItem("misc_resource", "resin")));
+
+            MeltingRecipeManager.instance.addRecipe(rubber, new FluidStack(liquid_rubber,FoundryAPI.FLUID_AMOUNT_INGOT),460,100);
+        MeltingRecipeManager.instance.addRecipe(resin, new FluidStack(liquid_rubber,FoundryAPI.FLUID_AMOUNT_INGOT * 2),640,150);
             FoundryUtils.registerBasicMeltingRecipes( "resin", liquid_rubber);
 
             FoundryMiscUtils.registerCasting(copper_cable, new FluidStack(liquid_copper, FoundryAPI.FLUID_AMOUNT_INGOT / 3), ItemMold.SubItem.CABLE_IC2, null);
@@ -191,14 +173,6 @@ public class ModIntegrationIC2 implements IModIntegration {
             FoundryMiscUtils.registerCasting(iron_casing, new FluidStack(liquid_iron, FoundryAPI.FLUID_AMOUNT_INGOT / 2), ItemMold.SubItem.CASING_IC2, null);
             FoundryMiscUtils.registerCasting(lead_casing, new FluidStack(liquid_lead, FoundryAPI.FLUID_AMOUNT_INGOT / 2), ItemMold.SubItem.CASING_IC2, null);
             FoundryMiscUtils.registerCasting(steel_casing, new FluidStack(liquid_steel, FoundryAPI.FLUID_AMOUNT_INGOT / 2), ItemMold.SubItem.CASING_IC2, null);
-
-            FoundryMiscUtils.registerCasting(dense_copper, new FluidStack(liquid_copper, FoundryAPI.FLUID_AMOUNT_INGOT * 9), ItemMold.SubItem.DENSE_PLATE_IC2, null);
-            FoundryMiscUtils.registerCasting(dense_tin, new FluidStack(liquid_tin, FoundryAPI.FLUID_AMOUNT_INGOT * 9), ItemMold.SubItem.DENSE_PLATE_IC2, null);
-            FoundryMiscUtils.registerCasting(dense_bronze, new FluidStack(liquid_bronze, FoundryAPI.FLUID_AMOUNT_INGOT * 9), ItemMold.SubItem.DENSE_PLATE_IC2, null);
-            FoundryMiscUtils.registerCasting(dense_gold, new FluidStack(liquid_gold, FoundryAPI.FLUID_AMOUNT_INGOT * 9), ItemMold.SubItem.DENSE_PLATE_IC2, null);
-            FoundryMiscUtils.registerCasting(dense_iron, new FluidStack(liquid_iron, FoundryAPI.FLUID_AMOUNT_INGOT * 9), ItemMold.SubItem.DENSE_PLATE_IC2, null);
-            FoundryMiscUtils.registerCasting(dense_lead, new FluidStack(liquid_lead, FoundryAPI.FLUID_AMOUNT_INGOT * 9),ItemMold.SubItem.DENSE_PLATE_IC2, null);
-            FoundryMiscUtils.registerCasting(dense_steel, new FluidStack(liquid_steel, FoundryAPI.FLUID_AMOUNT_INGOT * 9), ItemMold.SubItem.DENSE_PLATE_IC2, null);
 
 //           FoundryMiscUtils.RegisterMoldRecipe(ItemMold.ItemMold.SubItem.CABLE_IC2_IC2_SOFT, copper_cable);
 //           FoundryMiscUtils.RegisterMoldRecipe(ItemMold.ItemMold.SubItem.CABLE_IC2_IC2_SOFT, tin_cable);
