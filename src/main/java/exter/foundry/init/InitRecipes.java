@@ -265,6 +265,22 @@ public class InitRecipes
         AtomizerRecipeManager.instance.addRecipe(new ItemStackMatcher(dust), new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT));
       }
 
+      // Tiny Dust
+      ItemStack tinydust = FoundryMiscUtils.getModItemFromOreDictionary("dustTiny" + name);
+      if(tinydust != null)
+      {
+        FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT / 9);
+        MeltingRecipeManager.instance.addRecipe(new ItemStackMatcher(tinydust), fluid_stack, fluid_stack.getFluid().getTemperature(), 100 / 9);
+      }
+
+      // Smol Dust
+      ItemStack smoldust = FoundryMiscUtils.getModItemFromOreDictionary("dustSmall" + name);
+      if(smoldust != null)
+      {
+        FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT / 4);
+        MeltingRecipeManager.instance.addRecipe(new ItemStackMatcher(smoldust), fluid_stack, fluid_stack.getFluid().getTemperature(), 25);
+      }
+
       // Gear
       ItemStack gear = FoundryMiscUtils.getModItemFromOreDictionary("gear" + name);
       if(gear != null)
@@ -283,6 +299,15 @@ public class InitRecipes
         CastingRecipeManager.instance.addRecipe(new ItemStackMatcher(plate), fluid_stack, mold_plate, null);
         CastingTableRecipeManager.instance.addRecipe(new ItemStackMatcher(plate), fluid_stack, ICastingTableRecipe.TableType.PLATE);
         MeltingRecipeManager.instance.addRecipe(new ItemStackMatcher(plate), fluid_stack);
+      }
+
+      // Dense Plate
+      ItemStack denseplate = FoundryMiscUtils.getModItemFromOreDictionary("plateDense" + name);
+      if(plate != null)
+      {
+        FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT * 9);
+
+        MeltingRecipeManager.instance.addRecipe(new ItemStackMatcher(denseplate), fluid_stack);
       }
 
       // Rod
