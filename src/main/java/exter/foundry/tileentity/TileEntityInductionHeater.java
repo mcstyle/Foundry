@@ -3,7 +3,6 @@ package exter.foundry.tileentity;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.heatable.IHeatProvider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidTank;
@@ -100,6 +99,4 @@ public class TileEntityInductionHeater extends TileEntityFoundryPowered
   {
     return 2;
   }
-
-
 }

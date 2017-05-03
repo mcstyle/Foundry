@@ -1,6 +1,7 @@
 package exter.foundry.integration;
 
         import exter.foundry.api.FoundryUtils;
+        import exter.foundry.api.recipe.matcher.OreMatcher;
         import exter.foundry.fluid.FoundryFluids;
         import exter.foundry.recipes.manager.MoldRecipeManager;
         import exter.foundry.api.recipe.matcher.ItemStackMatcher;
@@ -113,7 +114,6 @@ public class ModIntegrationIC2 implements IModIntegration {
         ItemStack lead_casing = ItemStack.copyItemStack(IC2Items.getItem("casing", "lead"));
         ItemStack steel_casing = ItemStack.copyItemStack(IC2Items.getItem("casing", "steel"));
 
-
         ItemStack copper_cable_insulated = ItemStack.copyItemStack(IC2Items.getItem("cable", "type:copper,insulation:1"));
         ItemStack tin_cable_insulated = ItemStack.copyItemStack(IC2Items.getItem("cable", "type:tin,insulation:1"));
         ItemStack gold_cable_insulated1x = ItemStack.copyItemStack(IC2Items.getItem("cable", "type:gold,insulation:1"));
@@ -133,8 +133,8 @@ public class ModIntegrationIC2 implements IModIntegration {
 
             if(FoundryConfig.recipe_equipment)
             {
-                ItemStack extra_sticks1 = new ItemStack(Items.STICK, 1);
-                ItemStack extra_sticks2 = new ItemStack(Items.STICK, 2);
+                OreMatcher extra_sticks1 = new OreMatcher("stickWood",1);
+                OreMatcher extra_sticks2 = new OreMatcher("stickWood",2);
 
                 FoundryMiscUtils.registerCasting(bronze_chestplate, new FluidStack(liquid_bronze, FoundryAPI.FLUID_AMOUNT_INGOT * 8), ItemMold.SubItem.CHESTPLATE, null);
                 FoundryMiscUtils.registerCasting(bronze_pickaxe, new FluidStack(liquid_bronze, FoundryAPI.FLUID_AMOUNT_INGOT * 3), ItemMold.SubItem.PICKAXE, extra_sticks2);
@@ -160,10 +160,10 @@ public class ModIntegrationIC2 implements IModIntegration {
             FoundryMiscUtils.registerCasting(gold_cable, new FluidStack(liquid_gold, FoundryAPI.FLUID_AMOUNT_INGOT / 4), ItemMold.SubItem.CABLE_IC2, null);
             FoundryMiscUtils.registerCasting(iron_cable, new FluidStack(liquid_iron, FoundryAPI.FLUID_AMOUNT_INGOT / 4), ItemMold.SubItem.CABLE_IC2, null);
 
-            FoundryMiscUtils.registerCasting(copper_cable_insulated, new FluidStack(liquid_rubber, FoundryAPI.FLUID_AMOUNT_INGOT), ItemMold.SubItem.INSULATED_CABLE_IC2, copper_cable);
-            FoundryMiscUtils.registerCasting(tin_cable_insulated, new FluidStack(liquid_rubber, FoundryAPI.FLUID_AMOUNT_INGOT), ItemMold.SubItem.INSULATED_CABLE_IC2, tin_cable);
-            FoundryMiscUtils.registerCasting(gold_cable_insulated2x, new FluidStack(liquid_rubber, FoundryAPI.FLUID_AMOUNT_INGOT * 2), ItemMold.SubItem.INSULATED_CABLE_IC2, gold_cable);
-            FoundryMiscUtils.registerCasting(iron_cable_insulated3x, new FluidStack(liquid_rubber, FoundryAPI.FLUID_AMOUNT_INGOT * 3), ItemMold.SubItem.INSULATED_CABLE_IC2, iron_cable);
+            FoundryMiscUtils.registerCasting(copper_cable_insulated, new FluidStack(liquid_rubber, FoundryAPI.FLUID_AMOUNT_INGOT), ItemMold.SubItem.INSULATED_CABLE_IC2, new ItemStackMatcher(copper_cable));
+            FoundryMiscUtils.registerCasting(tin_cable_insulated, new FluidStack(liquid_rubber, FoundryAPI.FLUID_AMOUNT_INGOT), ItemMold.SubItem.INSULATED_CABLE_IC2, new ItemStackMatcher(tin_cable));
+            FoundryMiscUtils.registerCasting(gold_cable_insulated2x, new FluidStack(liquid_rubber, FoundryAPI.FLUID_AMOUNT_INGOT * 2), ItemMold.SubItem.INSULATED_CABLE_IC2, new ItemStackMatcher(gold_cable));
+            FoundryMiscUtils.registerCasting(iron_cable_insulated3x, new FluidStack(liquid_rubber, FoundryAPI.FLUID_AMOUNT_INGOT * 3), ItemMold.SubItem.INSULATED_CABLE_IC2, new ItemStackMatcher(iron_cable));
 
 
             FoundryMiscUtils.registerCasting(copper_casing, new FluidStack(liquid_copper, FoundryAPI.FLUID_AMOUNT_INGOT / 2), ItemMold.SubItem.CASING_IC2, null);

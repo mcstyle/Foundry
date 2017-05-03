@@ -285,6 +285,15 @@ public class InitRecipes
         MeltingRecipeManager.instance.addRecipe(new ItemStackMatcher(plate), fluid_stack);
       }
 
+      // Dense Plate
+      ItemStack denseplate = FoundryMiscUtils.getModItemFromOreDictionary("plateDense" + name);
+      if(denseplate != null)
+      {
+        FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT * 9);
+
+        MeltingRecipeManager.instance.addRecipe(new ItemStackMatcher(denseplate), fluid_stack);
+      }
+
       // Rod
       ItemStack rod = FoundryMiscUtils.getModItemFromOreDictionary("rod" + name);
       if(rod != null)
@@ -331,7 +340,7 @@ public class InitRecipes
         BurnerHeaterFuelManager.instance.getHeatNeeded(187000, FoundryAPI.CRUCIBLE_BASIC_TEMP_LOSS_RATE));
 
     BurnerHeaterFuelManager.instance.addFuel(
-        new OreMatcher("itemCoalCoke"),
+        new OreMatcher("fuelCoke"),
         3200,
         BurnerHeaterFuelManager.instance.getHeatNeeded(215000, FoundryAPI.CRUCIBLE_BASIC_TEMP_LOSS_RATE));
 

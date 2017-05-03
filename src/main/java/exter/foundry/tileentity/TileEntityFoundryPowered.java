@@ -2,32 +2,29 @@ package exter.foundry.tileentity;
 
 
 
+import java.lang.reflect.InvocationTargetException;
+
 import cofh.api.energy.IEnergyReceiver;
-import ic2.api.energy.tile.IEnergyEmitter;
-import ic2.api.energy.tile.IEnergyTile;
 import net.darkhax.tesla.api.ITeslaConsumer;
 import net.darkhax.tesla.capability.TeslaCapabilities;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
+import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySink;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
-
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * Base class for all machines.
  */
 @Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "IC2")
-public abstract class TileEntityFoundryPowered extends TileEntityFoundry implements IEnergyReceiver, IEnergySink, IEnergyTile
+public abstract class TileEntityFoundryPowered extends TileEntityFoundry implements IEnergyReceiver,IEnergySink
 {
   @Optional.Interface(iface = "net.darkhax.tesla.api.ITeslaConsumer", modid = "Tesla")
   private class TeslaConsumer implements ITeslaConsumer
@@ -195,7 +192,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
   {
     update_energy_tick = true;
   }
-
+  
   @Override
   public void update()
   {
@@ -203,7 +200,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
     {
       try
       {
-        getClass().getMethod("LoadEnet").invoke(this);
+        getClass().getMethod("loadEnet").invoke(this);
       } catch(IllegalAccessException e)
       {
         throw new RuntimeException(e);
@@ -336,7 +333,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
   {
     try
     {
-      getClass().getMethod("UnloadEnet").invoke(this);
+      getClass().getMethod("unloadEnet").invoke(this);
     } catch(IllegalAccessException e)
     {
       throw new RuntimeException(e);
@@ -359,7 +356,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
   }
 
   @Optional.Method(modid = "IC2")
-  public void UnloadEnet()
+  public void unloadEnet()
   {
     if(added_enet)
     {
@@ -369,9 +366,9 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
   }
 
   @Optional.Method(modid = "IC2")
-  public void LoadEnet()
+  public void loadEnet()
   {
-    if(!added_enet && !FMLCommonHandler.instance().getEffectiveSide().isClient())
+    if(!added_enet && !getWorld().isRemote)
     {
       MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
       added_enet = true;
