@@ -1,5 +1,6 @@
 package exter.foundry.init;
 
+import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
@@ -90,41 +91,41 @@ public class InitAlloyRecipes
 
     if(liquid_redstone != null) {
       AlloyMixerRecipeManager.instance.addRecipe(
-          new FluidStack(FoundryFluids.liquid_signalum, 108),
+          new FluidStack(FoundryFluids.liquid_signalum, FoundryAPI.FLUID_AMOUNT_INGOT),
           new FluidStack[] {
-              new FluidStack(FoundryFluids.liquid_copper, 81),
-              new FluidStack(FoundryFluids.liquid_silver, 27),
+              new FluidStack(FoundryFluids.liquid_copper, FoundryAPI.FLUID_AMOUNT_INGOT / 4/3),
+              new FluidStack(FoundryFluids.liquid_silver, FoundryAPI.FLUID_AMOUNT_INGOT / 4),
               new FluidStack(liquid_redstone, 250)
           });
     }
 
     if(liquid_glowstone != null) {
       AlloyMixerRecipeManager.instance.addRecipe(
-          new FluidStack(FoundryFluids.liquid_lumium, 108),
+          new FluidStack(FoundryFluids.liquid_lumium, FoundryAPI.FLUID_AMOUNT_INGOT),
           new FluidStack[] {
-              new FluidStack(FoundryFluids.liquid_tin, 81),
-              new FluidStack(FoundryFluids.liquid_silver, 27),
+              new FluidStack(FoundryFluids.liquid_tin, FoundryAPI.FLUID_AMOUNT_INGOT / 4/3),
+              new FluidStack(FoundryFluids.liquid_silver, FoundryAPI.FLUID_AMOUNT_INGOT / 4),
               new FluidStack(liquid_glowstone, 250)
           });
     }
 
     if(liquid_enderpearl != null) {
       AlloyMixerRecipeManager.instance.addRecipe(
-          new FluidStack(FoundryFluids.liquid_enderium, 108),
+          new FluidStack(FoundryFluids.liquid_enderium, FoundryAPI.FLUID_AMOUNT_INGOT),
           new FluidStack[] {
-              new FluidStack(FoundryFluids.liquid_tin, 54),
-              new FluidStack(FoundryFluids.liquid_silver, 27),
-              new FluidStack(FoundryFluids.liquid_platinum, 27),
+              new FluidStack(FoundryFluids.liquid_tin, FoundryAPI.FLUID_AMOUNT_INGOT / 2),
+              new FluidStack(FoundryFluids.liquid_silver, FoundryAPI.FLUID_AMOUNT_INGOT / 4),
+              new FluidStack(FoundryFluids.liquid_platinum, FoundryAPI.FLUID_AMOUNT_INGOT / 4),
               new FluidStack(liquid_enderpearl, 250)
           });
     }
     
     if(FoundryConfig.recipe_steel)
     {
-      InfuserRecipeManager.instance.addRecipe(new FluidStack(FoundryFluids.liquid_steel,36), new FluidStack(FoundryFluids.liquid_iron,36), new OreMatcher("dustCoal"), 160000);
-      InfuserRecipeManager.instance.addRecipe(new FluidStack(FoundryFluids.liquid_steel,12), new FluidStack(FoundryFluids.liquid_iron,12), new OreMatcher("dustCharcoal"), 160000);
-      InfuserRecipeManager.instance.addRecipe(new FluidStack(FoundryFluids.liquid_steel,9), new FluidStack(FoundryFluids.liquid_iron,9), new OreMatcher("dustSmallCoal"), 40000);
-      InfuserRecipeManager.instance.addRecipe(new FluidStack(FoundryFluids.liquid_steel,3), new FluidStack(FoundryFluids.liquid_iron,3), new OreMatcher("dustSmallCharcoal"), 40000);
+      InfuserRecipeManager.instance.addRecipe(new FluidStack(FoundryFluids.liquid_steel,FoundryAPI.FLUID_AMOUNT_INGOT / 4), new FluidStack(FoundryFluids.liquid_iron,FoundryAPI.FLUID_AMOUNT_INGOT / 4), new OreMatcher("dustCoal"), 160000);
+      InfuserRecipeManager.instance.addRecipe(new FluidStack(FoundryFluids.liquid_steel,FoundryAPI.FLUID_AMOUNT_INGOT / 12), new FluidStack(FoundryFluids.liquid_iron,FoundryAPI.FLUID_AMOUNT_INGOT / 12), new OreMatcher("dustCharcoal"), 160000);
+      InfuserRecipeManager.instance.addRecipe(new FluidStack(FoundryFluids.liquid_steel,FoundryAPI.FLUID_AMOUNT_INGOT / 16), new FluidStack(FoundryFluids.liquid_iron,FoundryAPI.FLUID_AMOUNT_INGOT / 16), new OreMatcher("dustSmallCoal"), 40000);
+      InfuserRecipeManager.instance.addRecipe(new FluidStack(FoundryFluids.liquid_steel,FoundryAPI.FLUID_AMOUNT_INGOT / 48), new FluidStack(FoundryFluids.liquid_iron,FoundryAPI.FLUID_AMOUNT_INGOT / 48), new OreMatcher("dustSmallCharcoal"), 40000);
     }
   }
 }

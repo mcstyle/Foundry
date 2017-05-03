@@ -105,9 +105,9 @@ public class ModIntegrationRailcraft implements IModIntegration {
 
             if(FoundryConfig.recipe_equipment)
             {
-                ItemStack extra_sticks1 = new ItemStack(Items.STICK, 1);
-                ItemStack extra_sticks2 = new ItemStack(Items.STICK, 2);
-                ItemStack crowbar_siding = FoundryMiscUtils.getModItemFromOreDictionary("dyeRed", 4);
+                OreMatcher extra_sticks1 = new OreMatcher("stickWood",1);
+                OreMatcher extra_sticks2 = new OreMatcher("stickWood",2);
+                OreMatcher crowbar_siding = new OreMatcher("dyeRed", 4);
 
                 FoundryMiscUtils.registerCasting(steel_chestplate, new FluidStack(liquid_steel, FoundryAPI.FLUID_AMOUNT_INGOT * 8), ItemMold.SubItem.CHESTPLATE, null);
                 FoundryMiscUtils.registerCasting(steel_pickaxe, new FluidStack(liquid_steel, FoundryAPI.FLUID_AMOUNT_INGOT * 3), ItemMold.SubItem.PICKAXE, extra_sticks2);

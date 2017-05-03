@@ -147,15 +147,15 @@ public class InitToolRecipes
     
     for(Entry<String, FluidLiquidMetal> metal:LiquidMetalRegistry.instance.getFluids().entrySet())
     {
-      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("substratum", "pickaxe" + metal.getKey()), metal.getValue(), 3, ItemMold.SubItem.PICKAXE, extra_sticks2);
-      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("substratum", "axe" + metal.getKey()), metal.getValue(), 3, ItemMold.SubItem.AXE, extra_sticks2);
-      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("substratum", "shovel" + metal.getKey()), metal.getValue(), 1, ItemMold.SubItem.SHOVEL, extra_sticks2);
-      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("substratum", "hoe" + metal.getKey()), metal.getValue(), 2, ItemMold.SubItem.HOE, extra_sticks2);
-      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("substratum", "sword" + metal.getKey()), metal.getValue(), 2, ItemMold.SubItem.SWORD, extra_sticks1);
-      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("substratum", "helmet" + metal.getKey()), metal.getValue(), 5, ItemMold.SubItem.HELMET);
-      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("substratum", "chestplate" + metal.getKey()), metal.getValue(), 8, ItemMold.SubItem.CHESTPLATE);
-      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("substratum", "leggings" + metal.getKey()), metal.getValue(), 7, ItemMold.SubItem.LEGGINGS);
-      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("substratum", "boots" + metal.getKey()), metal.getValue(), 4, ItemMold.SubItem.BOOTS);
+      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("pickaxe" + metal.getKey()), metal.getValue(), 3, ItemMold.SubItem.PICKAXE, extra_sticks2);
+      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("axe" + metal.getKey()), metal.getValue(), 3, ItemMold.SubItem.AXE, extra_sticks2);
+      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("shovel" + metal.getKey()), metal.getValue(), 1, ItemMold.SubItem.SHOVEL, extra_sticks2);
+      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("hoe" + metal.getKey()), metal.getValue(), 2, ItemMold.SubItem.HOE, extra_sticks2);
+      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("sword" + metal.getKey()), metal.getValue(), 2, ItemMold.SubItem.SWORD, extra_sticks1);
+      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("helmet" + metal.getKey()), metal.getValue(), 5, ItemMold.SubItem.HELMET);
+      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("chestplate" + metal.getKey()), metal.getValue(), 8, ItemMold.SubItem.CHESTPLATE);
+      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("leggings" + metal.getKey()), metal.getValue(), 7, ItemMold.SubItem.LEGGINGS);
+      FoundryMiscUtils.registerCasting(FoundryMiscUtils.getModItemFromOreDictionary("boots" + metal.getKey()), metal.getValue(), 4, ItemMold.SubItem.BOOTS);
     }
   }
 }
