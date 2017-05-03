@@ -8,6 +8,7 @@ import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.item.FoundryItems;
 import exter.foundry.item.ItemMold;
+import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
 import exter.foundry.recipes.manager.InfuserRecipeManager;
 import exter.foundry.recipes.manager.MoldRecipeManager;
 import exter.foundry.util.FoundryMiscUtils;
@@ -85,6 +86,16 @@ public class ModIntegrationRailcraft implements IModIntegration {
         {
             return;
         }
+
+        BurnerHeaterFuelManager.instance.addFuel(
+                new ItemStackMatcher(getItemStack("firestone_refined")),
+                250,
+                BurnerHeaterFuelManager.instance.getHeatNeeded(250000, FoundryAPI.CRUCIBLE_BASIC_TEMP_LOSS_RATE));
+
+        BurnerHeaterFuelManager.instance.addFuel(
+                new ItemStackMatcher(getItemStack("firestone_cracked")),
+                100,
+                BurnerHeaterFuelManager.instance.getHeatNeeded(195000, FoundryAPI.CRUCIBLE_BASIC_TEMP_LOSS_RATE));
 
         ItemStack steel_pickaxe = getItemStack("tool_pickaxe_steel");
         ItemStack steel_axe = getItemStack("tool_axe_steel");

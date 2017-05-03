@@ -303,7 +303,7 @@ public class InitRecipes
 
       // Dense Plate
       ItemStack denseplate = FoundryMiscUtils.getModItemFromOreDictionary("plateDense" + name);
-      if(plate != null)
+      if(denseplate != null)
       {
         FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT * 9);
 
