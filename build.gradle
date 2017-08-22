@@ -18,6 +18,8 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
+sourceCompatibility = targetCompatibility = '1.8'
+
 def mod_version = "2.2.3.1-patch"
 
 def mc_version = "1.10.2"
@@ -35,19 +37,23 @@ minecraft {
 }
 
 repositories {
-     maven {
+    maven {
         name "DVS1 Maven FS'"
         url 'http://dvs1.progwml6.com/files/maven'
-    }    
+    }
     maven {
-        url 'http://maven.epoxide.xyz'
+        url 'http://maven.epoxide.org'
+    }
+    maven {
+        url 'http://maven.ic2.player.to/'
     }
 }
 
 dependencies {
     //compile name: 'MineTweaker3', version: 'Dev-1.8-3.0.10', ext: 'jar'
-    deobfCompile "mezz.jei:jei_1.10.2:3.14.7.416"
+    compile "mezz.jei:jei_1.10.2:3.14.7.420"
     compile "net.darkhax.tesla:Tesla:1.10.2-1.2.1.49"
+    compile 'net.industrial-craft:industrialcraft-2:2.6.252-ex110:api'
 }
 
 
